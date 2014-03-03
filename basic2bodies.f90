@@ -26,15 +26,16 @@ program nbody
 		do i = 1,n
 			do j = 1,n
 				if (j == i) CYCLE
-				r(1:3) = (pos(1:3,i)-pos(1:3,j))
-				rad = sqrt((pos(1,i)-pos(1,j))**2 + (pos(2,i)-pos(2,j))**2 + (pos(3,i)-pos(3,j))**2)
-				a(1:3,j) = -((G * m(i))/rad**3)*r(1:3)
-				v(1:3,j) = v(1:3,j) - a(1:3,j)*dt
+				a(1:3,i) = 0.0 ! resetting the acceleration every loop
+				r(1:3) = (pos(1:3,i)-pos(1:3,j)) ! vector between objects i and j 
+				rad = sqrt((pos(1,i)-pos(1,j))**2 + (pos(2,i)-pos(2,j))**2 + (pos(3,i)-pos(3,j))**2) ! length of r
+				a(1:3,i) = a(1:3,i) + ((G * m(j))/rad**3)*r(1:3) ! acceleration ma = Gmm/r^3 * rvector
 			end do
-			pos(1:3,i) = pos(1:3,i) + v(1:3,i)*dt
-			if (MOD(counter,1000000) == 0) print *, pos(1:2,1)
+			v(1:3,i) = v(1:3,i) - a(1:3,i)*dt ! update the objects velocities
+			pos(1:3,i) = pos(1:3,i) + v(1:3,i)*dt ! move the objects
+			if (MOD(counter,1000000) == 0) print *, pos(1:2,2) ! don't print every step
 			counter = counter + 1
 		end do
-		t = t + dt
+		t = t + dt ! step time
 	end do 
 end program nbody
