@@ -107,8 +107,8 @@ program nbody
 				print *, 1-e_t/e_0
 				counter = 0
 			end if
-		end do
-		t = t + dt ! step time
+		end t
+		do = t + dt ! step time
 	end do 
 end program nbody
 
