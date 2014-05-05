@@ -15,7 +15,7 @@ program nbody
 	t = 0.0 ! the time
 	year = 3.15570e7 !number of seconds in a year
 	dt = 10 ! time interval (s)
-	n = 3 ! number of bodies
+	n = 6 ! number of bodies
 	G = 6.67e-11 ! G (Nm**2/kg**2)
 	pos = 0.0 ! position coordinates (m)
 	v = 0.0 ! velocities (m/s)
