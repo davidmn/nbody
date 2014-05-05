@@ -6,12 +6,12 @@ program nbody
 	double precision :: vel_temp
 	! vectors in format (x1,y1,z1), (x2,y2,z2)
 	double precision, DIMENSION(3, 3) :: pos,v,a
-	double precision, DIMENSION(3) :: m
+	double precision, DIMENSION(3) :: m, class
 	double precision, DIMENSION(3) :: r,com,cov
 	counter = 0 ! used for printing
 	t = 0.0 ! the time
 	year = 3.15570e7 !number of seconds in a year
-	dt = 1 ! time interval (s)
+	dt = 600 ! time interval (s)
 	n = 3 ! number of bodies
 	G = 6.67e-11 ! G (Nm**2/kg**2)
 	pos = 0.0 ! position coordinates (m)
@@ -72,7 +72,7 @@ program nbody
 	e_0 = ke_tot + u_tot
 
 	! main loop, loops over time
-	do while (t < 12*year)
+	do while (t < 10000*year)
 		!in the first loop (nested) calculated the acceleration on each body due to each other body
 		a = 0.0
 		do i = 1,n
@@ -89,7 +89,7 @@ program nbody
 			v(1:3,i) = v(1:3,i) + a(1:3,i)*dt ! update the objects velocities
 			! counter loop to check accuracy and print data
 			counter = counter + 1
-			if ( counter >= 10000000 ) then
+			if ( counter >= 1000000 ) then
 				ke_tot = 0.0
 				u_tot = 0.0
 				! find kinetic energy
@@ -111,7 +111,7 @@ program nbody
 				! sum energies	
 				e_t = u_tot + ke_tot
 				! energy difference
-				print *, 1-e_t/e_0
+				print *, ((e_t-e_0)/e_0)*100 ,t/year
 				counter = 0
 			end if
 		end do
