@@ -3,23 +3,23 @@ program nbody
 
 	integer :: i,j,n, counter, l, k
 	double precision :: G, dt, rad, year, t, e_0, e_t, ke_tot,ke_temp, u_temp, u_tot, m_tot
-	double precision :: vel_temp, current_time, criteria
+	double precision :: vel_temp, current_time, criteria, AU, uranus_distance
 	! vectors in format (x1,y1,z1), (x2,y2,z2)
-	double precision, DIMENSION(3, 6) :: pos,v,a,a2
-	double precision, DIMENSION(6) :: m
+	double precision, DIMENSION(3, 7) :: pos,v,a,a2
+	double precision, DIMENSION(7) :: m
 	double precision, DIMENSION(3) :: r,com,cov
 	integer, DIMENSION(6) :: class
+	AU = 1.5e11 ! astronomical unit
 	criteria = 0
 	class = 1 ! start all planets having acc calculated every step, higher class are calculaed less often
 	counter = 0 ! used for printing
 	t = 0.0 ! the time
 	year = 3.15570e7 !number of seconds in a year
-	dt = 10 ! time interval (s)
-	n = 6 ! number of bodies
+	dt = 30 ! time interval (s)
+	n = 7 ! number of bodies
 	G = 6.67e-11 ! G (Nm**2/kg**2)
 	pos = 0.0 ! position coordinates (m)
 	v = 0.0 ! velocities (m/s)
-	a = 0.0 ! acceleration (m/s*2)
 	a = 0.0 ! acceleration (m/s*2)
 	r = 0.0 ! direction of the gravitational force
 	m(1) = 1.99e30 ! mass sun (kg)
@@ -28,6 +28,7 @@ program nbody
 	m(4) = 6.39e23 ! mass mars (kg)
 	m(5) = 1.90e27 ! mass jupiter (kg)
 	m(6) = 5.683e27 ! mass saturn (kg)
+	m(7) = 8.68e25 ! uranus mass (kg)
 	pos(1,2) = 1.089e11 ! venus sun distance (m)
 	pos(1,3) = 1.496e11 ! earth sun distance (m)
 	pos(1,4) = 2.387e11 ! mars sun distance (m)
@@ -38,6 +39,7 @@ program nbody
 	v(2,4) = 2.41e4 ! mars velocity (m/s)
 	v(2,5) = 1.307e4 ! jupiter velocity (m/s)
 	v(2,6) = 9.64e3 ! saturn velocity (m/s)
+	V(2,7) = 6.7e3 ! uranus velocity (m/s)
 	com = 0.0 ! centre of mass array
 	cov = 0.0 ! centre of velocity array
 	m_tot = 0.0 ! total mass of system
@@ -139,7 +141,9 @@ program nbody
 				e_t = u_tot + ke_tot
 				! energy difference
 				current_time = t/year
-				print *, ((e_t-e_0)/e_0)*100, "time  =", current_time
+				!print *, ((e_t-e_0)/e_0)*100, "time  =", current_time
+				uranus_distance = pos(1,1)
+				print *, "time =", current_time, uranus_distance
 				counter = 0
 			end if
 		end do

@@ -3,11 +3,14 @@ program nbody
 
 	integer :: i,j,n, counter, l, k
 	double precision :: G, dt, rad, year, t, e_0, e_t, ke_tot,ke_temp, u_temp, u_tot, m_tot
-	double precision :: vel_temp, current_time
+	double precision :: vel_temp, current_time, criteria
 	! vectors in format (x1,y1,z1), (x2,y2,z2)
 	double precision, DIMENSION(3, 6) :: pos,v,a,a2
 	double precision, DIMENSION(6) :: m
 	double precision, DIMENSION(3) :: r,com,cov
+	integer, DIMENSION(6) :: class
+	criteria = 0
+	class = 1 ! start all planets moving every step
 	counter = 0 ! used for printing
 	t = 0.0 ! the time
 	year = 3.15570e7 !number of seconds in a year
