@@ -16,6 +16,9 @@ The same code as basic2bodies but with Jupiter added.
 2ndordernbody
 -------------
 
-Change algorithm to kick drift kick (2nd order approximation)
-*to do
-	* everything
+Second order kick drift kick simulation.
+
+TO DO
+-----
+ - Random initial conditions
+ - Adaptive time step
